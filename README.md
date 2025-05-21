@@ -24,6 +24,18 @@ Este projeto configura todo o ambiente necessário para a execução do ecossist
 | Produto      | 8084        | toy-store-product        | http://localhost:8084/swagger-ui/index.html#          |
 | Pedido       | 8080        | pedido-service           | http://localhost:8080/pedido/swagger-ui/index.html    |
 
+| Serviço    | Porta Local  | Container             | Swagger URL                                                                                                    | Repositório GitHub                                                     |
+| ---------- | ------------ | --------------------- | -------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------- |
+| PostgreSQL | 5432         | postgres-toy-store    | N/A                                                                                                            | N/A                                                                    |
+| MongoDB    | 27017        | mongo-toy-store       | N/A                                                                                                            | N/A                                                                    |
+| RabbitMQ   | 5672 / 15672 | rabbitmq-toy-store    | N/A                                                                                                            | N/A                                                                    |
+| Pagamento  | 8081         | toy-store-pagamento   | [http://localhost:8081/swagger-ui/index.html#/](http://localhost:8081/swagger-ui/index.html#/)                 | [PagamentoApplication](https://github.com/fmonin/PagamentoApplication) |
+| Estoque    | 8082         | toy-store-stock       | [http://localhost:8082/stock/swagger-ui/index.html#](http://localhost:8082/stock/swagger-ui/index.html#)       | [toystore-stock](https://github.com/fakynno/toystore-stock)            |
+| Cliente    | 8083         | toystore-customer-app | [http://localhost:8083/customer/swagger-ui/index.html#](http://localhost:8083/customer/swagger-ui/index.html#) | [toystore-customer](https://github.com/fakynno/toystore-customer)      |
+| Produto    | 8084         | toy-store-product     | [http://localhost:8084/swagger-ui/index.html#](http://localhost:8084/swagger-ui/index.html#)                   | [toystore-product](https://github.com/fakynno/toystore-product)        |
+| Pedido     | 8080         | pedido-service        | [http://localhost:8080/pedido/swagger-ui/index.html](http://localhost:8080/pedido/swagger-ui/index.html)       | [pedidos](https://github.com/marcelonidal/pedidos)                     |
+
+
 ## 🔧 Como Usar
 
 1. Clone este repositório:
@@ -71,4 +83,5 @@ A inicialização respeita a dependência entre os serviços:
 ## Sobre o projeto
 ### Desenho de arquitetura
 ![Documentação do Projeto](assets/Fluxo-pedido-exemplo.png)
+
 
