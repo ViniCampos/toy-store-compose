@@ -80,8 +80,9 @@ A inicialização respeita a dependência entre os serviços:
 * **RabbitMQ** usa credenciais padrão: `guest` / `guest`.
 * Todos os containers estão na rede Docker `toystorerede`.
 
-## Sobre o projeto
+## 🛠️ Sobre o projeto
 ### Desenho de arquitetura
 ![Documentação do Projeto](assets/Fluxo-pedido-exemplo.png)
 
-
+### Modelo de Dados
+![Documentação do Projeto](assets/Modelo-de-Dados.docx)
