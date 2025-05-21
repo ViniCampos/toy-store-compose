@@ -1,4 +1,3 @@
-version: '3.8'
 
 networks:
   toystorerede:
@@ -83,7 +82,7 @@ services:
       - toystorerede
 
   pedido-service:
-    image: marcelonidal/pedido-service:latest
+    image: marcelonidal/pedido-service:1.0
     container_name: pedido-service
     depends_on:
       - postgres-toy-store
@@ -95,5 +94,10 @@ services:
       DB_HOST: postgres-toy-store
       MONGO_HOST: mongo-toy-store
       RABBIT_HOST: rabbitmq-toy-store
+      HOST_CLIENTE: toystore-customer-app:8080
+      HOST_PRODUTO: app-toy-store-product:8080
+      HOST_ESTOQUE: app-toy-store-stock:8080
+      HOST_PAGAMENTO: toy-store-Pagamento:8080
     networks:
       - toystorerede
+
