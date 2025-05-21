@@ -4,6 +4,13 @@
 
 Este projeto configura todo o ambiente necessário para a execução do ecossistema Toystore utilizando Docker Compose.
 
+## 💪 Requisitos
+
+* Docker
+* Docker Compose
+
+---
+
 ## 🚀 Serviços Disponíveis
 
 | Serviço      | Porta Local | Container               |
@@ -32,3 +39,31 @@ docker ps
 docker-compose down
 
 ```
+
+## 📂 Estrutura dos Containers
+
+| Container             | Imagem                                  |
+| --------------------- | --------------------------------------- |
+| postgres-toy-store    | postgres                                |
+| mongo-toy-store       | mongo                                   |
+| rabbitmq-toy-store    | rabbitmq\:management                    |
+| toy-store-pagamento   | 1moninfernando/toy-store-apppag:1.5     |
+| app-toy-store-stock   | majorv22/toy-store-stock:1.0            |
+| toystore-customer-app | evaldofires/toystore-customer-app:1.0.2 |
+| app-toy-store-product | fakynno/toy-store-product:1.0           |
+| pedido-service        | marcelonidal/pedido-service\:latest     |
+
+## 📅 Ordem de Inicialização dos Containers
+
+A inicialização respeita a dependência entre os serviços:
+
+1. PostgreSQL
+2. MongoDB
+3. RabbitMQ
+4. Microsserviços dependentes (Pagamentos, Estoque, Cliente, Produto, Pedido)
+
+## 🔍 Notas
+
+* Banco **PostgreSQL** cria automaticamente a base `pedidos`.
+* **RabbitMQ** usa credenciais padrão: `guest` / `guest`.
+* Todos os containers estão na rede Docker `toystorerede`.
