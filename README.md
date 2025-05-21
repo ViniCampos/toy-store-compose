@@ -12,18 +12,6 @@ Este projeto configura todo o ambiente necessário para a execução do ecossist
 ---
 
 ## 🚀 Serviços Disponíveis
-
-| Serviço      | Porta Local | Container                |  Swagger
-|--------------|-------------|--------------------------|-------------------------------------------------------|
-| PostgreSQL   | 5432        | postgres-toy-store       |  N/A  |
-| MongoDB      | 27017       | mongo-toy-store          |  N/A  |
-| RabbitMQ     | 5672 / 15672| rabbitmq-toy-store       |  N/A  |
-| Pagamento    | 8081        | toy-store-pagamento      | http://localhost:8081/swagger-ui/index.html#/         |
-| Estoque      | 8082        | toy-store-stock          | http://localhost:8082/stock/swagger-ui/index.html#    |
-| Cliente      | 8083        | toystore-customer-app    | http://localhost:8083/customer/swagger-ui/index.html# |
-| Produto      | 8084        | toy-store-product        | http://localhost:8084/swagger-ui/index.html#          |
-| Pedido       | 8080        | pedido-service           | http://localhost:8080/pedido/swagger-ui/index.html    |
-
 | Serviço    | Porta Local  | Container             | Swagger URL                                                                                                    | Repositório GitHub                                                     |
 | ---------- | ------------ | --------------------- | -------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------- |
 | PostgreSQL | 5432         | postgres-toy-store    | N/A                                                                                                            | N/A                                                                    |
