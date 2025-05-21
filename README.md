@@ -1,5 +1,3 @@
-# toy-store-compose
-
 # Toystore - Ambiente Local com Docker Compose
 
 Este projeto configura todo o ambiente necessário para a execução do ecossistema Toystore utilizando Docker Compose.
@@ -15,6 +13,7 @@ Este projeto configura todo o ambiente necessário para a execução do ecossist
 7. [🔍 Notas](#-notas)
 8. [Sobre o projeto](#sobre-o-projeto)
    - [Desenho de arquitetura](#desenho-de-arquitetura)
+   - [Modelo de Dados](#modelo-de-dados)
 
 ## 💪 Requisitos
 
