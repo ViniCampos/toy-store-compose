@@ -1,0 +1,55 @@
+--Network
+docker network create toystorerede
+
+--Mongo
+docker run --name mongo-toy-store --network toystorerede -d -p 27017:27017 mongo
+
+--Postgre
+docker run -d --name postgres-toy-store --network toystorerede -e DB_HOST=postgres-toy-store -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=postgres -e POSTGRES_DB=pedidos -p 5432:5432 postgres
+
+--RabbitMQ
+docker run -d --name rabbitmq-toy-store --network toystorerede -e RABBIT_HOST=rabbitmq-toy-store -p 5672:5672 -p 15672:15672 rabbitmq
+
+--Pagamentos
+//NECESSÁRIO MONGO
+//Repo - https://github.com/fmonin/PagamentoApplication
+docker pull 1moninfernando/toy-store-apppag:1.5
+docker run -d -p 8081:8080 `
+  --name toy-store-Pagamento `
+  --network toystorerede `
+  -e SPRING_DATA_MONGODB_URI=mongodb://mongo-toy-store:27017/pagamentos `
+  1moninfernando/toy-store-apppag:1.5
+
+
+--Estoque
+//NECESSÁRIO MONGO
+PATH: /stock
+docker pull majorv22/toy-store-stock:1.0
+docker run  -d -p 8082:8080 `
+  --name app-toy-store-stock `
+  --network toystorerede `
+  -e SPRING_PROFILES_ACTIVE=docker `
+  -e SPRING_DATA_MONGODB_URI=mongodb://mongo-toy-store:27017/stock `
+  majorv22/toy-store-stock:1.0
+
+
+--Cliente
+//NECESSÁRIO POSTGRE
+PATH: /customer
+docker pull evaldofires/toystore-customer-app:1.0.2
+docker run -d --name toystore-customer-app -p 8083:8080 --network toystorerede -e SPRING_PROFILES_ACTIVE=docker evaldofires/toystore-customer-app:1.0.2
+
+--Produtos
+//UTILIZANDO H2
+docker pull fakynno/toy-store-product:1.0
+docker run -d --name app-toy-store-product -p 8084:8080 --name app-toy-store-product fakynno/toy-store-product:1.0 --network toystorerede
+
+
+--Pedido-Service
+//NECESSÁRIO POSTGRE
+//NECESSÁRIO MONGO
+//NECESSÁRIO RABBIT MQ
+PATH: /customer
+//Repo: https://github.com/marcelonidal/pedidos
+docker pull marcelonidal/pedido-service
+docker run -d --name pedido-service -p 8080:8080 --network toystorerede -e DB_HOST=postgres-toy-store -e MONGO_HOST=mongo-toy-store -e RABBIT_HOST=rabbitmq-toy-store marcelonidal/pedido-service:latest

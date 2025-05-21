@@ -13,16 +13,16 @@ Este projeto configura todo o ambiente necessário para a execução do ecossist
 
 ## 🚀 Serviços Disponíveis
 
-| Serviço      | Porta Local | Container               |
-|--------------|-------------|--------------------------|
-| PostgreSQL   | 5432        | postgres-toy-store       |
-| MongoDB      | 27017       | mongo-toy-store          |
-| RabbitMQ     | 5672 / 15672| rabbitmq-toy-store       |
-| Pagamento    | 8081        | toy-store-pagamento      |
-| Estoque      | 8082        | toy-store-stock          |
-| Cliente      | 8083        | toystore-customer-app    |
-| Produto      | 8084        | toy-store-product        |
-| Pedido       | 8080        | pedido-service           |
+| Serviço      | Porta Local | Container                |  Swagger
+|--------------|-------------|--------------------------|-------------------------------------------------------|
+| PostgreSQL   | 5432        | postgres-toy-store       |  N/A  |
+| MongoDB      | 27017       | mongo-toy-store          |  N/A  |
+| RabbitMQ     | 5672 / 15672| rabbitmq-toy-store       |  N/A  |
+| Pagamento    | 8081        | toy-store-pagamento      | http://localhost:8081/swagger-ui/index.html#/         |
+| Estoque      | 8082        | toy-store-stock          | http://localhost:8082/stock/swagger-ui/index.html#    |
+| Cliente      | 8083        | toystore-customer-app    | http://localhost:8083/customer/swagger-ui/index.html# |
+| Produto      | 8084        | toy-store-product        | http://localhost:8084/swagger-ui/index.html#          |
+| Pedido       | 8080        | pedido-service           | http://localhost:8080/pedido/swagger-ui/index.html    |
 
 ## 🔧 Como Usar
 
@@ -67,3 +67,8 @@ A inicialização respeita a dependência entre os serviços:
 * Banco **PostgreSQL** cria automaticamente a base `pedidos`.
 * **RabbitMQ** usa credenciais padrão: `guest` / `guest`.
 * Todos os containers estão na rede Docker `toystorerede`.
+
+## Sobre o projeto
+### Desenho de arquitetura
+![Documentação do Projeto](assets/Fluxo-pedido-exemplo.png)
+

@@ -1,0 +1,99 @@
+version: '3.8'
+
+networks:
+  toystorerede:
+    driver: bridge
+
+services:
+  postgres-toy-store:
+    image: postgres
+    container_name: postgres-toy-store
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: pedidos
+    ports:
+      - "5432:5432"
+    networks:
+      - toystorerede
+
+  mongo-toy-store:
+    image: mongo
+    container_name: mongo-toy-store
+    ports:
+      - "27017:27017"
+    networks:
+      - toystorerede
+
+  rabbitmq-toy-store:
+    image: rabbitmq:management
+    container_name: rabbitmq-toy-store
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    networks:
+      - toystorerede
+
+  toy-store-pagamento:
+    image: 1moninfernando/toy-store-apppag:1.5
+    container_name: toy-store-Pagamento
+    depends_on:
+      - mongo-toy-store
+    ports:
+      - "8081:8080"
+    environment:
+      SPRING_DATA_MONGODB_URI: mongodb://mongo-toy-store:27017/pagamentos
+    networks:
+      - toystorerede
+
+  toy-store-stock:
+    image: majorv22/toy-store-stock:1.0
+    container_name: app-toy-store-stock
+    depends_on:
+      - mongo-toy-store
+    ports:
+      - "8082:8080"
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+      SPRING_DATA_MONGODB_URI: mongodb://mongo-toy-store:27017/stock
+    networks:
+      - toystorerede
+
+  toystore-customer-app:
+    image: evaldofires/toystore-customer-app:1.0.2
+    container_name: toystore-customer-app
+    depends_on:
+      - postgres-toy-store
+    ports:
+      - "8083:8080"
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+    networks:
+      - toystorerede
+
+  toy-store-product:
+    image: fakynno/toy-store-product:1.0
+    container_name: app-toy-store-product
+    ports:
+      - "8084:8080"
+    networks:
+      - toystorerede
+
+  pedido-service:
+    image: marcelonidal/pedido-service:latest
+    container_name: pedido-service
+    depends_on:
+      - postgres-toy-store
+      - mongo-toy-store
+      - rabbitmq-toy-store
+    ports:
+      - "8080:8080"
+    environment:
+      DB_HOST: postgres-toy-store
+      MONGO_HOST: mongo-toy-store
+      RABBIT_HOST: rabbitmq-toy-store
+    networks:
+      - toystorerede
