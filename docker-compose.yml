@@ -100,4 +100,6 @@ services:
       HOST_PAGAMENTO: toy-store-Pagamento:8080
     networks:
       - toystorerede
+    volumes:
+      - ./init-db:/docker-entrypoint-initdb.d
 
